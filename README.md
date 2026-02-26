@@ -15,11 +15,7 @@ O levantamento de dados fotométricos de quasares realizado pelo [S-PLUS](https:
 
 ![Curvas de transmitância](Imagens/filtros.png)
 
-Cada quasar catalogado pelo levantamento tem associado a si uma tupla:
-
-$$
-(\mathbf{x}, \mathbf{e}, z)
-$$
+Cada objeto astronômico tem uma tripla associada: $(\mathbf{x}, \mathbf{e}, z)$
 
 Onde:
 
@@ -42,27 +38,27 @@ No entanto, essa abordagem não associa explicitamente cada medida fotométrica 
 
 # Transformação em vetor
 
-A ideia de representar as covariáveis e suas incertezas em um vetor e utilizar um modelo de redes neurais convolucionais unidimensional foi inicialmente proposta por Rodrigues, Abramo e Hirata (2023).
+A ideia aqui é representar as covariáveis fotométricas (**$\mathbf{x}$**) e suas incertezas (**$\mathbf{e}$**) em um vetor unidimensional e usar uma *Rede Neural Convolucional* unidimensional para extrair padrões dessa sequência. Essa abordagem foi proposta por Rodrigues, Abramo e Hirata (2023).
 
-No contexto do presente projeto, $\mathbf{x}$ e $\mathbf{e}$ são ordenados de acordo com os comprimentos de onda de transmitância de cada filtro.
+Como cada filtro possui um comprimento de onda central, os vetores de entrada são ordenados pelo comprimento de onda. Isso é importante porque a rede neural convolucional explora relações espaciais na sequência — ou seja, filtros próximos em comprimento de onda ficam próximos também no vetor, preservando a estrutura física do problema.
 
 O autor sugere três versões de organização do vetor:
 
 ## 1. **no-$\sigma$**
 
-Dispor apenas as magnitudes fotométricas ($\mathbf{x}$) ordenadas no vetor, sem incluir os erros.
+Dispor apenas as magnitudes fotométricas (**$\mathbf{x}$**) ordenadas no vetor, sem incluir os erros (**$\mathbf{e}$**).
 
 ## 2. **with-$\sigma$**
 
-Dispor as magnitudes fotométricas ($\mathbf{x}$) no vetor seguidas pelas respectivas medidas de incerteza ($\mathbf{e}$), ambas ordenadas.
+Dispor as magnitudes fotométricas (**$\mathbf{x}$**) no vetor seguidas pelas respectivas medidas de incerteza (**$\mathbf{e}$**), ambas ordenadas.
 
 ## 3. **stack-$\sigma$**
 
 Dispor em canais diferentes as magnitudes fotométricas ($\mathbf{x}$) e suas respectivas medidas de incerteza ($\mathbf{e}$), ambas ordenadas.
 
-Dessa forma, ao utilizar essa metodologia, é possível incluir características da transmitância dos filtros nas covariáveis.
-
 Na versão **stack-$\sigma$**, as covariáveis estão diretamente relacionadas às suas incertezas, pois o vetor das covariáveis e o vetor de erros são sobrepostos na mesma ordem. Como as camadas convolucionais utilizam as características espaciais da entrada, a rede neural convolucional pode aprender diretamente a relação entre as medidas e suas incertezas.
+
+!(Transofrmação em vetor)[Images/cnn1d.png]
 
 ---
 
