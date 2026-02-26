@@ -19,8 +19,8 @@ Cada objeto astronômico tem uma tripla associada: $(\mathbf{x}, \mathbf{e}, z)$
 
 Onde:
 
-- **$\mathbf{x}$**: Magnitudes fotométricas para cada um dos 16 filtros;
-- **$\mathbf{e}$**: Medidas de erro;
+- **$\mathbf{x} = (x_1, \dots, x_16)$**: Magnitudes fotométricas para cada um dos 16 filtros;
+- **$\mathbf{e} = (e_1, \dots, e_16)$**: Medidas de erro;
 - **$z$**: *Redshift*.
 
 
@@ -42,6 +42,8 @@ A ideia aqui é representar as covariáveis fotométricas (**$\mathbf{x}$**) e s
 
 Como cada filtro possui um comprimento de onda central, os vetores de entrada são ordenados pelo comprimento de onda. Isso é importante porque a rede neural convolucional explora relações espaciais na sequência — ou seja, filtros próximos em comprimento de onda ficam próximos também no vetor, preservando a estrutura física do problema.
 
+![Transofrmação em vetor](Imagens/cnn1d.png)
+
 O autor sugere três versões de organização do vetor:
 
 ## 1. **no-$\sigma$**
@@ -57,8 +59,6 @@ Dispor as magnitudes fotométricas (**$\mathbf{x}$**) no vetor seguidas pelas re
 Dispor em canais diferentes as magnitudes fotométricas ($\mathbf{x}$) e suas respectivas medidas de incerteza ($\mathbf{e}$), ambas ordenadas.
 
 Na versão **stack-$\sigma$**, as covariáveis estão diretamente relacionadas às suas incertezas, pois o vetor das covariáveis e o vetor de erros são sobrepostos na mesma ordem. Como as camadas convolucionais utilizam as características espaciais da entrada, a rede neural convolucional pode aprender diretamente a relação entre as medidas e suas incertezas.
-
-![Transofrmação em vetor](Imagens/cnn1d.png)
 
 ---
 
@@ -117,6 +117,8 @@ Onde:
 - a matriz de covariância é diagonal, formada pelos quadrados dos elementos de $\mathbf{e}$.
 
 Assim, a tupla $(\mathbf{x}, \mathbf{e}, z)$ é substituída por $k$ pares $(\mathbf{y}_k, z)$.
+
+Essas novas instâncias podem ser utilizadas:
 
 ---
 
