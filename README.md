@@ -118,12 +118,6 @@ Onde:
 
 Assim, a tupla $(\mathbf{x}, \mathbf{e}, z)$ é substituída por $k$ pares $(\mathbf{y}_k, z)$.
 
-Essas novas instâncias podem ser utilizadas:
-
-- como entrada para uma rede neural artificial;
-- ordenadas segundo os comprimentos de onda da transmitância;
-- organizadas em vetor, formando uma versão alternativa da abordagem **no-$\sigma$**.
-
 ---
 
 # Referências
