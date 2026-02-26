@@ -1,20 +1,19 @@
-# Predição de redshifts fotométricos:utilizando erros de medida
+# Predição de redshifts fotométricos: utilizando erros de medida
 
 *Redshift* é uma medida astronômica que descreve o deslocamento de uma onda eletromagnética para o espectro vermelho. Essa medida é fundamental para quantificar a distância entre o observador e objetos astronômicos (como galáxias e quasares) e também para medir como o universo se expande.
 
 O método mais acurado para a estimação de *redshifts* é a espectroscopia. No entanto, por razões de custo e tempo, uma alternativa que vem sendo cada vez mais investigada é a estimação por fotometria. Nesse contexto, é mensurada a quantidade de luz que um objeto astronômico emite em determinados intervalos de comprimento de onda. Além disso, é possível mensurar uma grandeza de incerteza associada a essas quantidades de luz.
 
-Tradicionalmente, essas medidas fotométricas são utilizadas como covariáveis para a predição do *redshift* de um objeto. No entanto, as medidas de erro geralmente são descartadas nesses estudos. Diante disso, este projeto tem como foco a investigação de métodos de aprendizado de máquina que buscam incorporar medidas de incerteza para estimação de *redshifts*, utilizando dados de quasares do S-PLUS (*Southern Photometric Local Universe Survey*).
+Tradicionalmente, essas medidas fotométricas são utilizadas como covariáveis para a predição do *redshift* de um objeto. No entanto, as medidas de erro geralmente são descartadas nesses estudos. Diante disso, este projeto tem como foco a investigação de métodos de aprendizado de máquina que buscam incorporar medidas de incerteza para estimação de *redshifts*, utilizando dados de quasares do [S-PLUS (*Southern Photometric Local Universe Survey*)](https://www.splus.iag.usp.br/).
 
 ---
 
 # Conjunto de dados
 
-O levantamento de dados fotométricos de quasares realizado pelo S-PLUS se destaca por utilizar um sistema fotométrico de 12 filtros passa-banda, chamado *Javalambre*. Esse sistema possui sete filtros a mais do que a maioria dos levantamentos astronômicos convencionais.
+O levantamento de dados fotométricos de quasares realizado pelo [S-PLUS](https://www.splus.iag.usp.br/) se destaca por utilizar um sistema fotométrico de 12 filtros passa-banda, chamado *Javalambre*. Esse sistema possui sete filtros a mais do que a maioria dos levantamentos astronômicos convencionais. Esses sete filtros adicionais, mais estreitos e estrategicamente selecionados, têm a finalidade de viabilizar o estudo de características específicas denominadas linhas espectrais. Além disso, o levantamento contém informações de magnitudes fotométricas do catálogo [unWISE](https://catalog.unwise.me/) (W1 e W2) e do catálogo [GALEX](https://www.galex.caltech.edu) (FUV e NUV) (OLIVEIRA et. al, 2019) totalizando, assim, 16 filtros.
 
-Esses sete filtros adicionais, mais estreitos e estrategicamente selecionados, têm a finalidade de viabilizar o estudo de características específicas denominadas linhas espectrais.
 
-Além disso, o levantamento contém informações de magnitudes fotométricas do catálogo *unWISE* (W1 e W2) e do catálogo *GALEX* (FUV e NUV) (Oliveira et al., 2019), totalizando, assim, 16 filtros.
+![Curvas de transmitância](Imagens/filtros.png)
 
 Cada quasar catalogado pelo levantamento tem associado a si uma tupla:
 
@@ -24,21 +23,20 @@ $$
 
 Onde:
 
-- **$\mathbf{x}$** representa o vetor de magnitudes fotométricas mensuradas do quasar para cada um dos 16 filtros;
-- **$\mathbf{e}$** é um vetor que representa as medidas de erro associadas a essas magnitudes;
-- **$z$** representa a medida de *redshift* mensurada por espectroscopia.
+- **$\mathbf{x}$**: Magnitudes fotométricas para cada um dos 16 filtros;
+- **$\mathbf{e}$**: Medidas de erro;
+- **$z$**: *Redshift*.
 
-Assim, $z$ representa a variável resposta nesse contexto de predição.
-
-![Curvas de transmitância](Imagens/filtros.png)
 
 ---
 
-# Incorporação dos erros como covariáveis
+# Primeira abordagem:
 
 A abordagem mais simples para integrar as medidas de erro a uma rede neural artificial consiste em adicionar as medidas de erro à camada de entrada, junto às outras covariáveis.
 
 No entanto, essa abordagem não associa explicitamente cada medida fotométrica ao seu erro correspondente; todas as covariáveis passam a ter a mesma hierarquia dentro da rede.
+
+![Rede neural](Imagens/rede.png)
 
 ---
 
