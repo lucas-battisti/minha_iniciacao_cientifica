@@ -58,13 +58,13 @@ Dispor em canais diferentes as magnitudes fotométricas ($\mathbf{x}$) e suas re
 
 Na versão **stack-$\sigma$**, as covariáveis estão diretamente relacionadas às suas incertezas, pois o vetor das covariáveis e o vetor de erros são sobrepostos na mesma ordem. Como as camadas convolucionais utilizam as características espaciais da entrada, a rede neural convolucional pode aprender diretamente a relação entre as medidas e suas incertezas.
 
-![Transofrmação em vetor](Images/cnn1d.png)
+![Transofrmação em vetor](Imagens/cnn1d.png)
 
 ---
 
 # Transformação em matriz
 
-Nessa abordagem, também proposta por Rodrigues, Abramo e Hirata (2023), utiliza-se um modelo de redes neurais convolucionais bidimensional.
+Nessa abordagem, também proposta por Rodrigues, Abramo e Hirata (2023), utiliza-se um modelo de *Rede Neural Convolucional* bidimensional.
 
 O par $(\mathbf{x}, \mathbf{e})$ é transformado em uma matriz que representa a distribuição de probabilidade das magnitudes fotométricas. As covariáveis fotométricas são representadas nas colunas, enquanto as linhas representam os valores da distribuição de probabilidade para cada covariável.
 
@@ -92,6 +92,8 @@ Ao representar a matriz dessa forma:
 - associa-se diretamente cada magnitude à sua incerteza;
 - preserva-se a ordenação segundo a transmitância dos filtros;
 - incorpora-se explicitamente a natureza probabilística das incertezas.
+
+![Transformação em matriz](Imagens/cnn2d.png)
 
 ---
 
