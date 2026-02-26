@@ -58,7 +58,7 @@ Dispor em canais diferentes as magnitudes fotométricas ($\mathbf{x}$) e suas re
 
 Na versão **stack-$\sigma$**, as covariáveis estão diretamente relacionadas às suas incertezas, pois o vetor das covariáveis e o vetor de erros são sobrepostos na mesma ordem. Como as camadas convolucionais utilizam as características espaciais da entrada, a rede neural convolucional pode aprender diretamente a relação entre as medidas e suas incertezas.
 
-!(Transofrmação em vetor)[Images/cnn1d.png]
+![Transofrmação em vetor](Images/cnn1d.png)
 
 ---
 
